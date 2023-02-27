@@ -1,0 +1,28 @@
+.d-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.catalogue-card{
+  max-width: 400px;
+  margin:  10px;
+  text-align: center;
+}
+
+.button-div{
+  margin: 20px;
+}
+.button-div>
+button{
+  margin-right: 10px;
+}
+
+.card-image{
+  width: auto;
+}
+
+.pokemon-name{
+  font-size: 20px;
+}

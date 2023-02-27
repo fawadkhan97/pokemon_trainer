@@ -1,0 +1,44 @@
+
+
+
+  <div class="d-flex justify-content-center form-container-div">
+    <div class="login-form d-flex">
+      <ng-container *ngIf="!isUserLoggedIn">
+
+          <h1 class="text-center text-info font-weight-bold">Log in</h1>
+          <hr />
+
+    <span *ngIf="errors"
+      class="color-red animate__animated animate__bounceIn animate__infinite infinite">{{errors}}</span>
+
+<br>
+    <form (ngSubmit)="onSubmit()">
+
+ <mat-form-field appearance="outline">
+   <mat-label>Name</mat-label>
+   <input matInput placeholder="your name" [(ngModel)]="name" minlength="1" name="name">
+ </mat-form-field>
+
+            <button mat-raised-button color="primary" *ngIf="!SigningIn" type="submit">
+              Login And Save Name
+            </button>
+            <button *ngIf="SigningIn" class="animate__animated animate__fadeIn animate__infinite	infinite" type="button"
+              disabled>
+              Logging in...
+            </button>
+          </form>
+
+      </ng-container>
+
+  <ng-container *ngIf="isUserLoggedIn">
+    <div style="padding:25px;">
+
+      <br />
+      <p>please wait while we auhtenticate......</p>
+      <hr />
+
+    </div>
+
+  </ng-container>
+</div>
+</div>

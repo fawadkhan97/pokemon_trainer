@@ -1,0 +1,34 @@
+<div>
+<div class="card-container d-flex">
+
+  <!--<div *ngFor="let pokemon of pokemons" class="card">
+    <img [src]="pokemon.url | generateImageUrl" alt="John" >
+    <p>{{pokemon.name}}</p>
+  </div>
+</div>
+
+<div>
+  <button type="button" (click)="fetchMorePokemon()">Show More</button>
+  !--->
+  <mat-card class="catalogue-card animate__animated animate__fadeInLeft" *ngFor="let pokemon of pokemons">
+    <img mat-card-image [src]="pokemon.url | generateImageUrl" alt="Photo of a pokemons" class="card-image">
+    <mat-card-content>
+      <p class="pokemon-name">{{pokemon.name}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+
+      <button mat-raised-button color="primary">Add To Collection</button>
+    </mat-card-actions>
+  </mat-card>
+
+</div>
+
+<div class="d-flex button-div">
+ <button type="button" mat-raised-button color="primary" (click)="fetchIntialPokemonList()">First</button>
+      <button [disabled]="!pokeApiResponse.next" type="button" mat-raised-button color="primary"
+        (click)="fetchNextPokemonList()">Next</button>
+
+      <button [disabled]="!pokeApiResponse.previous" type="button" mat-raised-button color="primary"
+        (click)="fetchPreviousPokemonList()">Previous</button>
+</div>
+</div>
