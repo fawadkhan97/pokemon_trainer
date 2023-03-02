@@ -1,6 +1,6 @@
-import { Pokemon } from "./pokemon";
+import { Pokemon } from "./pokemon.model";
 
-export class pokeapiResponse {
+export class PokeApiResponse {
   count!: number;
   next!: string;
   previous!: string;

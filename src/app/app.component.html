@@ -1,5 +1,11 @@
 <header *ngIf="authService.isLoggedIn()">
-  Pokemon Trainer
+  <h3> Pokemon Trainer</h3>
+  <div class="text-align-right">
+    <button mat-flat-button color="accent" [routerLink]="'/catalogue'">Catalogue</button>
+    <button mat-flat-button color="accent" [routerLink]="'/trainer'">Trainer</button>
+        <button mat-flat-button color="accent" (click)="utilservice.logOut()">Log Out</button>
+
+  </div>
 </header>
 
 <ngx-ui-loader></ngx-ui-loader>

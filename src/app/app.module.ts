@@ -9,10 +9,11 @@ import { TrainerComponent } from './components/trainer/trainer.component';
 import { CatalogueComponent } from './components/catalogue/catalogue.component';
 import { FormsModule } from '@angular/forms';
 import { GenerateImagesUrlPipe } from './pipes/generate-images-url.pipe';
-import { MatButtonModule, MatCardModule, MatIconModule, MatInputModule } from '@angular/material';
-import { LoaderInterceptorService } from './services/loader-interceptor.service';
+import { MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatProgressSpinnerModule, MatSpinner } from '@angular/material';
+import { LoaderInterceptorService } from './services/http-interceptor.service';
 import { NgxUiLoaderConfig, NgxUiLoaderModule } from 'ngx-ui-loader';
 import { ToastrModule } from 'ngx-toastr';
+import { CheckIfPokemonExistsInTrainerCollectionPipe } from './pipes/check-if-pokemon-exists-in-trainer-collection.pipe';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: 'red',
@@ -52,6 +53,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     TrainerComponent,
     CatalogueComponent,
     GenerateImagesUrlPipe,
+    CheckIfPokemonExistsInTrainerCollectionPipe,
   ],
   imports: [
     BrowserModule,
@@ -63,8 +65,14 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     MatButtonModule,
     MatIconModule,
     MatInputModule,
+    MatProgressSpinnerModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+        tapToDismiss: false,
+        closeButton: true,
+        timeOut: 500000,
+        positionClass: 'toast-top-center',
+      }),
   ],
   exports: [MatCardModule, MatButtonModule, MatIconModule, MatInputModule],
   providers: [

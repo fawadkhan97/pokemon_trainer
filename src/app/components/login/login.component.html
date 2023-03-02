@@ -22,10 +22,9 @@
             <button mat-raised-button color="primary" *ngIf="!SigningIn" type="submit">
               Login And Save Name
             </button>
-            <button *ngIf="SigningIn" class="animate__animated animate__fadeIn animate__infinite	infinite" type="button"
-              disabled>
-              Logging in...
-            </button>
+            <mat-spinner *ngIf="SigningIn"> Logging in...
+</mat-spinner>
+
           </form>
 
       </ng-container>

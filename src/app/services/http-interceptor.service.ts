@@ -2,6 +2,7 @@ import { HttpHandler, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { LoaderService } from './loader.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -11,9 +12,9 @@ export class LoaderInterceptorService {
 
   constructor(private loaderService: LoaderService) {}
 
-  removeRequest(req: HttpRequest<any>) {
+  removeRequest(request: HttpRequest<any>) {
 
-    const i = this.requests.indexOf(req);
+  const i = this.requests.indexOf(request);
     if (i >= 0) {
       this.requests.splice(i, 1);
     }
@@ -21,16 +22,20 @@ export class LoaderInterceptorService {
       this.loaderService.hide();
     }
   }
-  intercept(req: HttpRequest<any>, next: HttpHandler) {
-    if (
-      req.url.endsWith('/gateway/auth') ||
-      req.url.endsWith('applicationLog')
-    ) {
-      return next.handle(req);
-    }
-    this.requests.push(req);
+  intercept(request: HttpRequest<any>, next: HttpHandler) {
+
+if (request.method == 'POST' || request.method == 'PATCH') {
+  request = request.clone({
+    setHeaders: {
+      'X-API-Key': environment['X-API-Key'],
+      'Content-Type': 'application/json',
+    },
+  });
+}
+
+    this.requests.push(request);
 
     this.loaderService.show();
-    return next.handle(req).pipe(finalize(() => this.removeRequest(req)));
+    return next.handle(request).pipe(finalize(() => this.removeRequest(request)));
   }
 }

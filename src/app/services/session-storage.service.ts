@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Pokemon } from '../models/pokemon';
-import { pokeapiResponse } from '../models/pokeapiResponse';
+import { PokeApiResponse } from '../models/pokeapiResponse.model';
+import { PokemonTrainer } from '../models/pokemonTrainer.model';
 
 @Injectable({
   providedIn: 'root',
@@ -8,26 +8,25 @@ import { pokeapiResponse } from '../models/pokeapiResponse';
 export class SessionStorageService {
   constructor() {}
 
-  saveUser(userName: string) {
-    sessionStorage.setItem('trainerName', userName);
+  saveUser(trainer: PokemonTrainer) {
+    sessionStorage.setItem('user', JSON.stringify (trainer));
   }
 
-  savePokemon(pokemons: pokeapiResponse) {
+  savePokemon(pokemons: PokeApiResponse) {
     sessionStorage.setItem("pokemons", JSON.stringify(pokemons));
   }
 
 
-  getUser() {
-        sessionStorage.getItem('trainerName');
-
+  getUser():PokemonTrainer {
+      return JSON.parse( sessionStorage.getItem('user')||'');
   }
 
-  getPokemonFromSession(): pokeapiResponse{
+  getPokemonFromSession(): PokeApiResponse{
     const data = sessionStorage.getItem('pokemons');
     if (data) {
     return  JSON.parse(data);
     } else {
-      return new pokeapiResponse(0,'','',[]);
+      return new PokeApiResponse(0,'','',[]);
     }
   }
 }

@@ -1,1 +1,17 @@
-<p>trainer works!</p>
+<div class="card-container d-flex">
+
+ <mat-card class="card animate__animated animate__zoomIn" *ngFor="let pokemon of trainer.pokemons">
+  <img mat-card-image [src]="pokemon.url | generateImageUrl" alt="Photo of a pokemons" class="card-image">
+  <mat-card-content>
+    <p class="pokemon-name">{{pokemon.name}}</p>
+  </mat-card-content>
+  <mat-card-actions>
+
+    <button mat-raised-button color="warn">Remove
+      <mat-icon aria-hidden="false" aria-label="Example home icon"> delete_forever</mat-icon>
+
+</button>
+  </mat-card-actions>
+</mat-card>
+
+</div>

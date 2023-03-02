@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { LoaderService } from './services/loader.service';
 import { AuthService } from './services/auth.service';
+import { UtilService } from './services/util.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,9 @@ export class AppComponent implements OnInit {
   constructor(
     private ngxLoader: NgxUiLoaderService,
     private loader: LoaderService,
-    private dct: ChangeDetectorRef,public authService: AuthService
+    private dct: ChangeDetectorRef, public authService: AuthService,
+
+  public  utilservice: UtilService
   ) {}
 
   ngOnInit(): void {

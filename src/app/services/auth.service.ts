@@ -7,6 +7,6 @@ export class AuthService {
 
   isLoggedIn(): boolean{
 
-    return !!sessionStorage.getItem('trainerName');
+    return !!sessionStorage.getItem('user');
   }
 }
