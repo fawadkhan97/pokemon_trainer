@@ -1,14 +1,4 @@
 <div class="card-container d-flex">
-
-  <!--<div *ngFor="let pokemon of pokemons" class="card">
-    <img [src]="pokemon.url | generateImageUrl" alt="John" >
-    <p>{{pokemon.name}}</p>
-  </div>
-</div>
-
-<div>
-  <button type="button" (click)="fetchMorePokemon()">Show More</button>
-  !--->
   <mat-card class="card animate__animated aanimate__zoomIn" *ngFor="let pokemon of pokemons">
     <img mat-card-image [src]="pokemon.url | generateImageUrl" alt="Photo of a pokemons" class="card-image">
     <mat-card-content>

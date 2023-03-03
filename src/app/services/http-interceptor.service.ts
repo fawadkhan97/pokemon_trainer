@@ -27,7 +27,7 @@ export class LoaderInterceptorService {
 if (request.method == 'POST' || request.method == 'PATCH') {
   request = request.clone({
     setHeaders: {
-      'X-API-Key': environment['X-API-Key'],
+      'X-API-Key': process.env['X_API_KEY']!,
       'Content-Type': 'application/json',
     },
   });
