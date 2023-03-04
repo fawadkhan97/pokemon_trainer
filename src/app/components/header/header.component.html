@@ -1,0 +1,10 @@
+<header *ngIf="authService.isLoggedIn()">
+  <h3 *ngIf="router.url === '/catalogue'"> Pokemon Catalogue </h3>
+  <h3 *ngIf="router.url === '/trainer'">Pokemon Collection</h3>
+  <div class="text-align-right">
+    <button mat-flat-button color="accent" [routerLink]="'/catalogue'">Catalogue</button>
+    <button mat-flat-button color="accent" [routerLink]="'/trainer'">Trainer</button>
+    <button mat-flat-button color="accent" (click)="utilservice.logOut()">Log Out</button>
+
+  </div>
+</header>
