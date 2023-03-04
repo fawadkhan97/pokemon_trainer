@@ -8,12 +8,11 @@ import { SessionStorageService } from 'src/app/services/session-storage.service'
 @Component({
   selector: 'app-catalogue',
   templateUrl: './catalogue.component.html',
-  styleUrls: ['./catalogue.component.css'],
+  styleUrls: ['./catalogue.component.css','.././../app.component.css'],
 })
 export class CatalogueComponent implements OnInit {
   pokemons!: Pokemon[];
   pokeApiResponse!: PokeApiResponse;
-  pokemonTrainer!: PokemonTrainer;
   user!: PokemonTrainer;
   constructor(
     private http: HttpService,
@@ -34,48 +33,67 @@ export class CatalogueComponent implements OnInit {
   }
 
   fetchNextPokemonList() {
-    this.http
-      .getPaginatedPokemons(this.pokeApiResponse.next)
-      .subscribe((data) => {
+    this.http.getPaginatedPokemons(this.pokeApiResponse.next).subscribe({
+      next: (data) => {
         console.log(data);
         this.pokeApiResponse = data;
         this.pokemons = data.results;
 
         this.sessionService.savePokemon(this.pokeApiResponse);
-      });
+      },
+      error: (error) => {
+        this.alertService.error(error.message);
+      },
+    });
   }
 
   fetchPreviousPokemonList() {
     this.http
       .getPaginatedPokemons(this.pokeApiResponse.previous)
-      .subscribe((data) => {
-        console.log(data);
-        this.pokeApiResponse = data;
-        this.pokemons = data.results;
-                this.sessionService.savePokemon(this.pokeApiResponse);
-
-      });
-  }
-
-  fetchIntialPokemonList() {
-      this.http.getPokemons().subscribe((data) => {
+      .subscribe({
+        next:(data)=>{
         console.log(data);
         this.pokeApiResponse = data;
         this.pokemons = data.results;
         this.sessionService.savePokemon(this.pokeApiResponse);
-      });
+
+      },
+     error: (error) => {
+        this.alertService.error(error.message);
+      }
+    });
+    };
+
+
+  fetchIntialPokemonList() {
+    this.http.getPokemons().subscribe({
+      next: (data) => {
+        console.log(data);
+        this.pokeApiResponse = data;
+        this.pokemons = data.results;
+        this.sessionService.savePokemon(this.pokeApiResponse);
+      },
+
+      error: (error) => {
+        this.alertService.error(error.message);
+      }
+    });
   }
 
   addPokemonsToTrainer(pokemon: Pokemon) {
 
-    console.log(this.pokemonTrainer);
-    this.http.addPokemonToTrainerCollection(this.user.id!,[...this.user.pokemons,pokemon]).subscribe({
+    this.http.updatePokemonToTrainerCollection(this.user.id!,[...this.user.pokemons,pokemon]).subscribe({
       next: (data) => {
         this.user = data;
         this.sessionService.saveUser(this.user);
         this.alertService.success(
           pokemon?.name + '  addded to trainer collection',"Success"
         );
+
+        let index = this.pokemons.findIndex((p) => p == pokemon);
+        this.pokemons[index].addedToTrainerCollection = true;
+
+        console.log(this.pokemons);
        },
       error: (error) => {this.alertService.error(error.message,"error");}
     });

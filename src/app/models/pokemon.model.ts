@@ -1,4 +1,5 @@
 export class Pokemon {
-  name! :string;
+  name!: string;
   url!: string;
+  addedToTrainerCollection: boolean = false;
 }

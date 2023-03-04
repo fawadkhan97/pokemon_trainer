@@ -14,6 +14,7 @@ import { LoaderInterceptorService } from './services/http-interceptor.service';
 import { NgxUiLoaderConfig, NgxUiLoaderModule } from 'ngx-ui-loader';
 import { ToastrModule } from 'ngx-toastr';
 import { CheckIfPokemonExistsInTrainerCollectionPipe } from './pipes/check-if-pokemon-exists-in-trainer-collection.pipe';
+import { HeaderComponent } from './components/header/header.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: 'red',
@@ -54,6 +55,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     CatalogueComponent,
     GenerateImagesUrlPipe,
     CheckIfPokemonExistsInTrainerCollectionPipe,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,7 +72,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     ToastrModule.forRoot({
         tapToDismiss: false,
         closeButton: true,
-        timeOut: 500000,
+        timeOut: 5000,
         positionClass: 'toast-top-center',
       }),
   ],

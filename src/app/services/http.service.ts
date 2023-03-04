@@ -29,7 +29,7 @@ export class HttpService {
     );
   }
 
-  addPokemonToTrainerCollection(
+  updatePokemonToTrainerCollection(
     id: number,
     pokemons: Pokemon[]
   ): Observable<PokemonTrainer> {
